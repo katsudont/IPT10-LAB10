@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; 
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0044cc; 
+        }
+
+        h3 {
+            color: #ffa500; 
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #0044cc; 
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0044cc;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        a.btn-logout {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ffcc00; 
+            color: #0044cc; 
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        a.btn-logout:hover {
+            background-color: #ffdd33;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to IPT10</h1>
+        <h3>Registered Users:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Complete Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#data}}
+                <tr>
+                    <td>{{ id }}</td>
+                    <td>{{ first_name }} {{ last_name }}</td>
+                    <td>{{ email }}</td>
+                </tr>
+                {{/data}}
+            </tbody>
+        </table>
+        <a href="/logout" class="btn-logout">Logout</a>
+    </div>
+</body>
+</html>

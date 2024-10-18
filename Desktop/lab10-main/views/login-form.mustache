@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #e0f7fa; 
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main__container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #ffffff; 
+            border-left: 8px solid #0044cc; 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+            border-radius: 8px; 
+            padding: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #0044cc; 
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #0044cc; 
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #0044cc; 
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #ffcc00; 
+            border: none;
+            border-radius: 6px;
+            color: #0044cc; 
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: #ffdd33; 
+        }
+
+        .alert-danger {
+            background-color: #ffebee; 
+            color: #d9534f; 
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            list-style-type: none;
+            text-align: left;
+        }
+
+        .error-message {
+            color: #d9534f;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main__container">
+        <h2>Login Form</h2>
+
+        <!-- Display any errors -->
+        {{#errors}}
+        <div class="alert-danger">
+            <ul>
+                {{#errors}}
+                    <li>{{.}}</li>
+                {{/errors}}
+            </ul>
+        </div>
+        {{/errors}}
+
+        <!-- Form fields (disabled if form_disabled is true) -->
+        <form action="/login" method="POST" {{#form_disabled}}style="pointer-events: none; opacity: 0.5;"{{/form_disabled}}>
+            <div>
+                <label for="username" class="form-label">Username or Email (required):</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username or Email" required {{#form_disabled}}disabled{{/form_disabled}}>
+            </div>
+
+            <div>
+                <label for="password" class="form-label">Password (required):</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required {{#form_disabled}}disabled{{/form_disabled}}>
+            </div>
+
+            <button type="submit" class="btn-primary" {{#form_disabled}}disabled{{/form_disabled}}>Login</button>
+        </form>
+
+        <!-- Display remaining attempts if there are failed login attempts -->
+        {{#show_remaining_attempts}}
+        <p style="color: #0044cc; margin-top: 10px;">
+            You have {{remaining_attempts}} remaining attempts.
+        </p>
+        {{/show_remaining_attempts}}
+
+        <!-- Display message when form is disabled due to too many failed attempts -->
+        {{#form_disabled}}
+        <p class="error-message">
+            Too many failed login attempts. Please try again later.
+        </p>
+        {{/form_disabled}}
+    </div>
+
+</body>
+</html>
